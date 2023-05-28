@@ -86,7 +86,7 @@ def gen_pdf(quantity, frame, type_of_page, numbered):
     path = PATH.format(f"{use_template.name}/{type_of_page}")
     frame_class = class_for_name("reportlab.lib.pagesizes", use_template.page_size)
     os.makedirs(path, exist_ok=True)
-    output = PyPDF2.PdfFileWriter()
+    output = PyPDF2.PdfWriter()
     for num in range(1, int(quantity) + 1):  # Adjust for the 1 start
         # Using ReportLab Canvas to insert image into PDF
         img_temp = BytesIO()
@@ -106,14 +106,14 @@ def gen_pdf(quantity, frame, type_of_page, numbered):
         img_doc.save()
 
         # Select page_to_merge
-        page_to_merge = PyPDF2.PdfFileReader(
+        page_to_merge = PyPDF2.PdfReader(
             open(TEMPLATE.format(use_template.name, type_of_page), "rb")
-        ).getPage(0)
-        # page_to_merge = PdfFileReader(open(TEMPLATE, "rb")).getPage(0)
-        page_to_merge.mergePage(
-            PyPDF2.PdfFileReader(BytesIO(img_temp.getvalue())).getPage(0)
+        ).pages[0]
+        # page_to_merge = PdfReader(open(TEMPLATE, "rb")).pages[0]
+        page_to_merge.merge_page(
+            PyPDF2.PdfReader(BytesIO(img_temp.getvalue())).pages[0]
         )
-        output.addPage(page_to_merge)
+        output.add_page(page_to_merge)
     # finally, write "output"
     output_stream = open(out_file, "wb")
     output.write(output_stream)

@@ -6,7 +6,7 @@ It has been tested in python3 only.
 ```bash
 git clone https://github.com/FranciscodeMaussion/RocketBookPages
 cd RocketBookPages
-pip install --editable .
+pip install -r requirements.txt
 ```
 
 ## Usage
@@ -44,7 +44,7 @@ To use a template file, put it in Sources/templates.json
 ## Example
 Will generate an A4 sized file with 5 pages and with DotGrid template with numbered pages.
 ```bash
-rocketqr create -q 5 -f A4 -t 0 -n True
+python rocketqr.py create -q 5 -f A4 -t 0 -n True
 ```
 
 ## Make use of
@@ -56,3 +56,16 @@ rocketqr create -q 5 -f A4 -t 0 -n True
 - [reportlab](https://www.reportlab.com/)
 - [six](https://github.com/benjaminp/six)
 
+
+
+## Cairo can't be installed
+This is a depedency graph requirement, avoiding installing `pycairo` would be a plus.
+
+To ensure `pycairo` can be installed, follow the installation instructions from [https://pycairo.readthedocs.io/en/latest/getting_started.html#getting-started]()
+which is likely just installing some OS packages.
+
+- Ubuntu/Debian: `sudo apt install libcairo2-dev pkg-config python3-dev`
+- macOS/Homebrew: `brew install cairo pkg-config`
+- Arch Linux: `sudo pacman -S cairo pkgconf`
+- Fedora: `sudo dnf install cairo-devel pkg-config python3-devel`
+- openSUSE: `sudo zypper install cairo-devel pkg-config python3-devel`
