@@ -6,7 +6,7 @@ It has been tested in python3 only.
 ```bash
 git clone https://github.com/FranciscodeMaussion/RocketBookPages
 cd RocketBookPages
-pip install --editable .
+pip install -r requirements.txt
 ```
 
 ## Usage
@@ -44,7 +44,7 @@ To use a template file, put it in Sources/templates.json
 ## Example
 Will generate an A4 sized file with 5 pages and with DotGrid template with numbered pages.
 ```bash
-rocketqr create -q 5 -f A4 -t 0 -n True
+python rocketqr.py create -q 5 -f A4 -t 0 -n True
 ```
 
 ## Make use of
